@@ -17,3 +17,5 @@ ok_library(ok
   texture.cc
   texture.h
 )
+
+target_link_libraries(ok PUBLIC Reactor)
