@@ -1,3 +1,4 @@
+#include "Reactor.hpp"
 #include "gtest/gtest.h"
 #include "texture.h"
 
@@ -22,6 +23,16 @@ TEST(OKTest, CanCreateTexture) {
     ASSERT_TRUE(texture.AllocateMemory());
     ASSERT_EQ(texture.GetReservedSize(), Bytes{800 * 600 * 1});
   }
+}
+
+TEST(OKTest, CanCreateReactor) {
+  rr::Function<rr::Int(rr::Void)> Return42;
+  { rr::Return(42); }
+
+  auto routine = Return42("Return42");
+
+  int (*result)() = (int (*)())routine->getEntry();
+  ASSERT_EQ(result(), 42);
 }
 
 }  // namespace ok::testing
