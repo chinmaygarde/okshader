@@ -17,7 +17,7 @@ class Texture final {
 
   constexpr PixelFormat GetPixelFormat() const { return PixelFormat_; }
 
-  [[nodiscard]]
+  [[nodiscard("Handle failed allocations.")]]
   bool AllocateMemory() {
     for (size_t i = 0; i < channels_.size(); i++) {
       if (!channels_[i].Truncate(
