@@ -1,4 +1,5 @@
 #include "Reactor.hpp"
+#include "command_buffer.h"
 #include "glm/vec2.hpp"
 #include "glm/vec4.hpp"
 #include "gtest/gtest.h"
@@ -30,7 +31,9 @@ TEST(OKTest, CanCreateTexture) {
 
 TEST(OKTest, CanCreateReactor) {
   rr::Function<rr::Int(rr::Void)> Return42;
-  { rr::Return(42); }
+  {
+    rr::Return(42);  //
+  }
 
   auto routine = Return42("Return42");
 
@@ -78,6 +81,31 @@ TEST(OKTest, CanCreateVertexAttributeAccessor) {
     ASSERT_EQ(*accessor(data.data(), 1), data[1].a);
     ASSERT_EQ(*accessor(data.data(), 2), data[2].a);
   }
+}
+
+TEST(OKTest, CanCreateCommandBuffer) {
+  PipelineDescriptor desc;
+
+  auto pipeline = Pipeline{desc};
+
+  CommandBuffer cmd_buffer;
+  cmd_buffer.Emplace(Command{
+      .pipeline = &pipeline,
+      .vertex_count = 300,
+  });
+  cmd_buffer.Emplace(Command{
+      .pipeline = &pipeline,
+      .vertex_count = 400,
+  });
+  cmd_buffer.Emplace(Command{
+      .pipeline = &pipeline,
+      .vertex_count = 500,
+  });
+  cmd_buffer.Emplace(Command{
+      .pipeline = &pipeline,
+      .vertex_count = 600,
+  });
+  ASSERT_EQ(cmd_buffer.GetCommandCount(), 4u);
 }
 
 }  // namespace ok::testing

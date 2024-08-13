@@ -28,6 +28,7 @@ class Pipeline {
 
  private:
   std::map<uint32_t, std::shared_ptr<rr::Routine>> vertex_attribute_accessors_;
+
   OK_DISALLOW_COPY_ASSIGN_AND_MOVE(Pipeline);
 };
 

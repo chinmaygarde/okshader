@@ -3,8 +3,14 @@ ok_library(ok
   allocation.h
   allocation_size.cc
   allocation_size.h
+  command.cc
+  command.h
+  command_buffer.cc
+  command_buffer.h
   constants.cc
   constants.h
+  input_assembler.cc
+  input_assembler.h
   logger.cc
   logger.h
   macros.h
