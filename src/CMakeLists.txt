@@ -8,6 +8,10 @@ ok_library(ok
   logger.cc
   logger.h
   macros.h
+  pipeline.cc
+  pipeline.h
+  pipeline_descriptor.cc
+  pipeline_descriptor.h
   queue.cc
   queue.h
   scalar.cc
@@ -18,4 +22,4 @@ ok_library(ok
   texture.h
 )
 
-target_link_libraries(ok PUBLIC Reactor)
+target_link_libraries(ok PUBLIC Reactor glm)

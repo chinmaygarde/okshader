@@ -1,7 +1,7 @@
 .PHONY: clean build test
 
 test: build
-	ctest --test-dir build -R $(TEST_FILTER)
+	ctest --output-on-failure --test-dir build -R $(TEST_FILTER)
 
 build: build/build.ninja
 	@cmake --build build
