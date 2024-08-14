@@ -25,4 +25,12 @@ class Logger {
 
 #define OK_LOG ::ok::Logger{__FILE__, __LINE__}.GetStream()
 
+[[noreturn]] void KillProcess();
+
+#define OK_UNREACHABLE                              \
+  {                                                 \
+    OK_LOG << "Reached unreachable code. Goodbye."; \
+    KillProcess();                                  \
+  }
+
 }  // namespace ok

@@ -2,6 +2,7 @@
 
 #include <cstddef>
 
+#include "logger.h"
 #include "size.h"
 
 namespace ok {
@@ -18,6 +19,7 @@ constexpr size_t ComponentsForFormat(PixelFormat format) {
     case PixelFormat::kRGBA8888:
       return 4u;
   }
+  OK_UNREACHABLE;
 }
 
 constexpr size_t BytesPerPixel(PixelFormat format) {
@@ -27,6 +29,7 @@ constexpr size_t BytesPerPixel(PixelFormat format) {
     case PixelFormat::kRGBA8888:
       return 4u;
   }
+  OK_UNREACHABLE;
 }
 
 constexpr size_t BytesPerComponent(PixelFormat format) {
@@ -35,6 +38,7 @@ constexpr size_t BytesPerComponent(PixelFormat format) {
     case PixelFormat::kRGBA8888:
       return 1u;
   }
+  OK_UNREACHABLE;
 }
 
 enum class PrimitiveType {
@@ -43,6 +47,24 @@ enum class PrimitiveType {
   kTriangleFan,
 };
 
-uint32_t TrianglesForPrimitiveType(PrimitiveType type, uint32_t vertex_count) {}
+constexpr uint32_t TrianglesForPrimitiveType(PrimitiveType type,
+                                             uint32_t vertex_count) {
+  switch (type) {
+    case PrimitiveType::kTriangle: {
+      return (vertex_count - vertex_count % 3u) / 3u;
+    }
+    case PrimitiveType::kTriangleStrip:
+    case PrimitiveType::kTriangleFan: {
+      if (vertex_count < 3u) {
+        return 0u;
+      } else if (vertex_count == 3u) {
+        return 1u;
+      } else {
+        return vertex_count - 2u;
+      }
+    }
+  }
+  OK_UNREACHABLE;
+}
 
 }  // namespace ok

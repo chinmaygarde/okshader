@@ -20,4 +20,8 @@ std::ostream& Logger::GetStream() {
   return stream_;
 }
 
+void KillProcess() {
+  std::abort();
+}
+
 }  // namespace ok

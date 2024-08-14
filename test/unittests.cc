@@ -108,6 +108,44 @@ TEST(OKTest, CanCreateCommandBuffer) {
   ASSERT_EQ(cmd_buffer.GetCommandCount(), 4u);
 }
 
+TEST(OKTest, TriangleCountsAreCorrect) {
+  ASSERT_EQ(TrianglesForPrimitiveType(PrimitiveType::kTriangle, 0), 0u);
+  ASSERT_EQ(TrianglesForPrimitiveType(PrimitiveType::kTriangle, 1), 0u);
+  ASSERT_EQ(TrianglesForPrimitiveType(PrimitiveType::kTriangle, 2), 0u);
+  ASSERT_EQ(TrianglesForPrimitiveType(PrimitiveType::kTriangle, 3), 1u);
+  ASSERT_EQ(TrianglesForPrimitiveType(PrimitiveType::kTriangle, 4), 1u);
+  ASSERT_EQ(TrianglesForPrimitiveType(PrimitiveType::kTriangle, 5), 1u);
+  ASSERT_EQ(TrianglesForPrimitiveType(PrimitiveType::kTriangle, 6), 2u);
+  ASSERT_EQ(TrianglesForPrimitiveType(PrimitiveType::kTriangle, 7), 2u);
+  ASSERT_EQ(TrianglesForPrimitiveType(PrimitiveType::kTriangle, 8), 2u);
+  ASSERT_EQ(TrianglesForPrimitiveType(PrimitiveType::kTriangle, 9), 3u);
+  ASSERT_EQ(TrianglesForPrimitiveType(PrimitiveType::kTriangle, 10), 3u);
+
+  ASSERT_EQ(TrianglesForPrimitiveType(PrimitiveType::kTriangleStrip, 0), 0u);
+  ASSERT_EQ(TrianglesForPrimitiveType(PrimitiveType::kTriangleStrip, 1), 0u);
+  ASSERT_EQ(TrianglesForPrimitiveType(PrimitiveType::kTriangleStrip, 2), 0u);
+  ASSERT_EQ(TrianglesForPrimitiveType(PrimitiveType::kTriangleStrip, 3), 1u);
+  ASSERT_EQ(TrianglesForPrimitiveType(PrimitiveType::kTriangleStrip, 4), 2u);
+  ASSERT_EQ(TrianglesForPrimitiveType(PrimitiveType::kTriangleStrip, 5), 3u);
+  ASSERT_EQ(TrianglesForPrimitiveType(PrimitiveType::kTriangleStrip, 6), 4u);
+  ASSERT_EQ(TrianglesForPrimitiveType(PrimitiveType::kTriangleStrip, 7), 5u);
+  ASSERT_EQ(TrianglesForPrimitiveType(PrimitiveType::kTriangleStrip, 8), 6u);
+  ASSERT_EQ(TrianglesForPrimitiveType(PrimitiveType::kTriangleStrip, 9), 7u);
+  ASSERT_EQ(TrianglesForPrimitiveType(PrimitiveType::kTriangleStrip, 10), 8u);
+
+  ASSERT_EQ(TrianglesForPrimitiveType(PrimitiveType::kTriangleFan, 0), 0u);
+  ASSERT_EQ(TrianglesForPrimitiveType(PrimitiveType::kTriangleFan, 1), 0u);
+  ASSERT_EQ(TrianglesForPrimitiveType(PrimitiveType::kTriangleFan, 2), 0u);
+  ASSERT_EQ(TrianglesForPrimitiveType(PrimitiveType::kTriangleFan, 3), 1u);
+  ASSERT_EQ(TrianglesForPrimitiveType(PrimitiveType::kTriangleFan, 4), 2u);
+  ASSERT_EQ(TrianglesForPrimitiveType(PrimitiveType::kTriangleFan, 5), 3u);
+  ASSERT_EQ(TrianglesForPrimitiveType(PrimitiveType::kTriangleFan, 6), 4u);
+  ASSERT_EQ(TrianglesForPrimitiveType(PrimitiveType::kTriangleFan, 7), 5u);
+  ASSERT_EQ(TrianglesForPrimitiveType(PrimitiveType::kTriangleFan, 8), 6u);
+  ASSERT_EQ(TrianglesForPrimitiveType(PrimitiveType::kTriangleFan, 9), 7u);
+  ASSERT_EQ(TrianglesForPrimitiveType(PrimitiveType::kTriangleFan, 10), 8u);
+}
+
 TEST(OKTest, CanConstructTriangleListFromCommand) {
   PipelineDescriptor desc;
   auto pipeline = Pipeline{desc};
