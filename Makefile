@@ -1,4 +1,4 @@
-.PHONY: clean build test
+.PHONY: clean build test update
 
 test: build
 	ctest --output-on-failure --test-dir build -R $(TEST_FILTER)
