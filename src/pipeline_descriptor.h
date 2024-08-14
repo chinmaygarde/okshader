@@ -5,21 +5,6 @@
 
 namespace ok {
 
-enum class VectorSize {
-  kOne = 1u,
-  kTwo,
-  kThree,
-  kFour,
-};
-
-enum class Type {
-  kUnsignedByte,
-  kByte,
-  kUnsignedShort,
-  kShort,
-  kFloat,
-};
-
 struct VertexAttribute {
   uint32_t offset = 0u;
   uint32_t stride = 0u;
