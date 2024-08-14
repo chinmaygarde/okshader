@@ -37,4 +37,12 @@ constexpr size_t BytesPerComponent(PixelFormat format) {
   }
 }
 
+enum class PrimitiveType {
+  kTriangle,
+  kTriangleStrip,
+  kTriangleFan,
+};
+
+uint32_t TrianglesForPrimitiveType(PrimitiveType type, uint32_t vertex_count) {}
+
 }  // namespace ok

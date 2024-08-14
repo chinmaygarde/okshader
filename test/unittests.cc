@@ -108,4 +108,14 @@ TEST(OKTest, CanCreateCommandBuffer) {
   ASSERT_EQ(cmd_buffer.GetCommandCount(), 4u);
 }
 
+TEST(OKTest, CanConstructTriangleListFromCommand) {
+  PipelineDescriptor desc;
+  auto pipeline = Pipeline{desc};
+
+  Command command;
+  command.pipeline = &pipeline;
+  command.vertex_count = 3u;
+  command.primitive_type = PrimitiveType::kTriangle;
+}
+
 }  // namespace ok::testing
