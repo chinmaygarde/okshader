@@ -30,11 +30,12 @@ class Logger {
   OK_DISALLOW_COPY_ASSIGN_AND_MOVE(Logger);
 };
 
-#define OK_LOG \
-  ::ok::Logger{ok::LogLevel::kStdout, __FILE__, __LINE__}.GetStream()
+#define OK_LOG_LEVEL(level) \
+  ::ok::Logger{(level), __FILE__, __LINE__}.GetStream()
 
-#define OK_ERROR \
-  ::ok::Logger{ok::LogLevel::kStderr, __FILE__, __LINE__}.GetStream()
+#define OK_LOG OK_LOG_LEVEL(::ok::LogLevel::kStdout)
+#define OK_ERROR OK_LOG_LEVEL(ok::LogLevel::kStderr)
+#define OK_FATAL OK_LOG_LEVEL(ok::LogLevel::kFatal)
 
 #define OK_CHECK(condition)                           \
   {                                                   \
