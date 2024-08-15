@@ -45,6 +45,12 @@ class Logger {
     }                                                 \
   }
 
+#ifndef NDEBUG
+#define OK_DCHECK OK_CHECK
+#else  // NDEBUG
+#define OK_DCHECK(condition) ((void)(condition));
+#endif  // NDEBUG
+
 [[noreturn]] void KillProcess();
 
 #define OK_UNREACHABLE                              \

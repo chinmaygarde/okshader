@@ -7,7 +7,7 @@ build: build/build.ninja
 	cmake --build build
 
 build/build.ninja:
-	cmake -B build -S . -G Ninja
+	cmake -B build -S . -G Ninja -DCMAKE_BUILD_TYPE=Debug
 
 clean:
 	rm -rf build
