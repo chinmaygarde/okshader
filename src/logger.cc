@@ -4,16 +4,31 @@
 
 namespace ok {
 
-static void ImpellerValidationBreak(const std::ostringstream& stream,
+static void ImpellerValidationBreak(LogLevel level,
+                                    const std::ostringstream& stream,
                                     const char* file,
                                     int line) {
-  std::cout << file << ":" << line << ": " << stream.str() << std::endl;
+  std::ostream* out_stream = {};
+  switch (level) {
+    case LogLevel::kStdout:
+      out_stream = &std::cout;
+      break;
+    case LogLevel::kStderr:
+    case LogLevel::kFatal:
+      out_stream = &std::cout;
+  }
+  *out_stream << file << ":" << line << ": " << stream.str() << std::endl;
+  if (level == LogLevel::kFatal) {
+    *out_stream << "Fatal error." << std::endl;
+    KillProcess();
+  }
 }
 
-Logger::Logger(const char* file, int line) : file_(file), line_(line) {}
+Logger::Logger(LogLevel level, const char* file, int line)
+    : level_(level), file_(file), line_(line) {}
 
 Logger::~Logger() {
-  ImpellerValidationBreak(stream_, file_, line_);
+  ImpellerValidationBreak(level_, stream_, file_, line_);
 }
 
 std::ostream& Logger::GetStream() {
