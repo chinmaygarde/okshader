@@ -22,7 +22,7 @@ class Pipeline {
       uint32_t location) const {
     return [entry = vertex_attribute_accessors_.at(location)->getEntry()](
                void* vertex_data, uint32_t index) -> const T* {
-      return (const T*)((void* (*)(uint8_t*, uint32_t))entry)(
+      return (const T*)((uint8_t * (*)(uint8_t*, uint32_t)) entry)(
           (uint8_t*)vertex_data, index);
     };
   }

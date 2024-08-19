@@ -7,7 +7,7 @@ namespace ok {
 using namespace rr;
 
 auto CreateVertexAttributeAccessor(const VertexAttribute& desc) {
-  Function<Pointer<Void>(Pointer<Byte>, UInt)> vertex_attribute_accessor;
+  Function<Pointer<Byte>(Pointer<Byte>, UInt)> vertex_attribute_accessor;
   {
     Pointer<Byte> data_ptr = vertex_attribute_accessor.Arg<0u>();
     UInt index = vertex_attribute_accessor.Arg<1u>();
