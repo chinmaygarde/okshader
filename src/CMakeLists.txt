@@ -26,6 +26,10 @@ ok_library(ok
   size.h
   texture.cc
   texture.h
+  typed_allocation.cc
+  typed_allocation.h
+  vertex_stage.cc
+  vertex_stage.h
 )
 
 target_link_libraries(ok PUBLIC Reactor glm)

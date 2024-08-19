@@ -1,7 +1,10 @@
 .PHONY: clean build test update
 
+TEST_FILTER?=.\*
+PARALLEL_COUNT?=`sysctl -n hw.ncpu`
+
 test: build
-	ctest --output-on-failure --test-dir build -R $(TEST_FILTER)
+	ctest -j $(PARALLEL_COUNT) --output-on-failure --test-dir build -R $(TEST_FILTER)
 
 build: build/build.ninja
 	cmake --build build
@@ -13,7 +16,7 @@ clean:
 	rm -rf build
 
 sync:
-	git submodule update --init --recursive --jobs 8
+	git submodule update --init --recursive --jobs $(PARALLEL_COUNT)
 
 stash_and_pull:
 	git stash

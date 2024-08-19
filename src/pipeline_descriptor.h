@@ -3,6 +3,8 @@
 #include <cstddef>
 #include <map>
 
+#include "vertex_stage.h"
+
 namespace ok {
 
 struct VertexAttribute {
@@ -12,6 +14,7 @@ struct VertexAttribute {
 
 struct PipelineDescriptor {
   std::map<uint32_t, VertexAttribute> vertex_attributes;
+  VertexStage vertex_stage;
 };
 
 }  // namespace ok

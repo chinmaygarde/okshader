@@ -16,7 +16,8 @@ auto CreateVertexAttributeAccessor(const VertexAttribute& desc) {
   return vertex_attribute_accessor("vertex_attribute_accessor");
 }
 
-Pipeline::Pipeline(const PipelineDescriptor& desc) {
+Pipeline::Pipeline(const PipelineDescriptor& desc)
+    : vertex_stage_(desc.vertex_stage) {
   for (const auto& vertex_attribute : desc.vertex_attributes) {
     vertex_attribute_accessors_[vertex_attribute.first] =
         CreateVertexAttributeAccessor(vertex_attribute.second);
@@ -24,5 +25,9 @@ Pipeline::Pipeline(const PipelineDescriptor& desc) {
 }
 
 Pipeline::~Pipeline() = default;
+
+VertexStage Pipeline::GetVertexStage() const {
+  return vertex_stage_;
+}
 
 }  // namespace ok
