@@ -31,10 +31,10 @@ bool InputAssembler::ProcessCommand(const Command& cmd) {
       }
     } break;
     case PrimitiveType::kTriangleStrip: {
-      OK_UNREACHABLE;
+      OK_UNIMPLEMENTED;
     } break;
     case PrimitiveType::kTriangleFan: {
-      OK_UNREACHABLE;
+      OK_UNIMPLEMENTED;
     } break;
   }
   return true;

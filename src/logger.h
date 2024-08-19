@@ -59,4 +59,7 @@ class Logger {
     KillProcess();                                  \
   }
 
+#define OK_UNIMPLEMENTED \
+  { OK_FATAL << "Unimplemented"; }
+
 }  // namespace ok
